@@ -21,6 +21,7 @@ pipeline {
                     """
                 }
             }
+            }
         stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
