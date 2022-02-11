@@ -4,7 +4,7 @@ properties([disableConcurrentBuilds()])
 
 pipeline {
     agent {
-        label 'master'
+        label 'main'
         }
     triggers { pollSCM('* * * * *') }
     options {
@@ -12,16 +12,6 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("docker login") {
-            steps {
-                echo " ============== docker login =================="
-                withCredentials([usernamePassword(credentialsId: 'dockerhub_semaev', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh """
-                    docker login -u $USERNAME -p $PASSWORD
-                    """
-                }
-            }
-        }
         stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
